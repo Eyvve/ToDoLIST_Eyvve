@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react';
 
-function Card({title, description, deleted, id, status, setCards, cards}) {
+function Card({title, description, id, status, setCards, cards}) {
 
   const handleClick = () => {
     switch(status) {
@@ -25,10 +25,7 @@ function Card({title, description, deleted, id, status, setCards, cards}) {
   }
 
   const handleDelete = () => {
-    deleted = true;
-    let newList= cards.filter(card => card.deleted == true).map(e => {
-      return {...e, deleted:deleted}
-    });
+    let newList= cards.filter(card => card.id !== id)
 
     setCards(newList);
   }

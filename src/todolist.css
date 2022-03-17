@@ -1,3 +1,7 @@
+.todolist_container {
+  margin-bottom: 50px;
+}
+
 .cardPreview_container {
   margin: 0 auto;
   position: relative;
@@ -18,6 +22,7 @@
   width: 100%;
   overflow-wrap: break-word;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
@@ -40,6 +45,11 @@
   margin: 0 auto;
 }
 
+.form-control {
+  overflow: auto;
+  overflow-wrap: break-word;
+}
+
 .top_container {
   position: relative;
   margin: 0 auto;
@@ -58,10 +68,6 @@
 .todo,
 .done {
   width: 50%;
-}
-
-.todo > h2 {
-  text-align: center;
 }
 
 .todo > div {

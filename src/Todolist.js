@@ -17,21 +17,26 @@ function Todolist() {
   }
 
   const handleAddItemOnList = (e) => {
-    e.preventDefault()
-    const id = generateUniqueID();
-    const temporaryList = {
-      id: id,
-      title: previewTitle,
-      description: previewDescription,
-      status: false,
-      deleted: false
-    };
+    if (previewTitle == "" && previewDescription == ""){
+      document.getElementById('alertContainer').innerHTML = '<div class="alert alert-warning" role="alert">Veuillez au moins renseigner un champ</div>'
+    }else{
+      e.preventDefault()
+      document.getElementById('alertContainer').innerHTML = ''
+      const id = generateUniqueID();
+      const temporaryList = {
+        id: id,
+        title: previewTitle,
+        description: previewDescription,
+        status: false
+      };
 
-    setCards(prev => [...prev, temporaryList])
-    setPreviewTitle('')
-    setPreviewDescripton('')
-    document.querySelector('#text').value = ""
-    document.querySelector('#textarea').value = ""
+      setCards(prev => [...prev, temporaryList])
+      setPreviewTitle('')
+      setPreviewDescripton('')
+      document.querySelector('#text').value = ""
+      document.querySelector('#textarea').value = ""
+    }
+    
   }
 
   console.log(cards)
@@ -39,7 +44,9 @@ function Todolist() {
 
   return (
     <div className="todolist_container">
+      <div id='alertContainer'></div>
       <div className="top_container">
+      
         <div className="form">
           <input type="text" className="form-control" id='text' placeholder="titre de la tâche" onChange={e => { setPreviewTitle(e.target.value) }} />
           <textarea wrap='hard' id='textarea' className="form-control" placeholder="Description de la tâche" onChange={e => { setPreviewDescripton(e.target.value) }} rows='6' cols="auto" />
@@ -58,14 +65,14 @@ function Todolist() {
         <div className="todo">
           <h2>A faire</h2>
           {cards.filter(card => card.status == false).map((card) => (
-            <Card key={card.id} id={card.id} title={card.title} description={card.description} deleted={card.deleted} cards={cards} setCards={setCards} status={card.status} />
+            <Card key={card.id} id={card.id} title={card.title} description={card.description} cards={cards} setCards={setCards} status={card.status} />
           ))}
         </div>
         {/* Cartes "DONE" */}
         <div className="done">
           <h2>Fait</h2>
           {cards.filter(card => card.status == true).map((card) => (
-            <Card key={card.id} id={card.id} title={card.title} description={card.description} deleted={card.deleted} cards={cards} setCards={setCards} status={card.status} />
+            <Card key={card.id} id={card.id} title={card.title} description={card.description} cards={cards} setCards={setCards} status={card.status} />
           ))}
         </div>
       </section>
