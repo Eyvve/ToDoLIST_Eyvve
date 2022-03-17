@@ -1,14 +1,25 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Card from './Card';
-
+import Todolimiter from './Todolimiter';
 
 function Todolist() {
 
   const [previewTitle, setPreviewTitle] = useState("");
   const [previewDescription, setPreviewDescripton] = useState("");
   const [cards, setCards] = useState([])
+
+  const [counterStatus, setCounterStatus] = useState(false);
+
+  useEffect(() => {
+    if (cards.filter(card => card.status == false).length >= 5){
+      setCounterStatus(true)  
+    }
+    else {
+      setCounterStatus(false)
+    }
+  });
 
   const generateUniqueID = () => {
     const animalList = ["poulet", "vache", "girafe", "loup","jambon", "chevre", "bouquetin", "Axolotl", "Perroquet", "Hippopotame", "corbeau"]
@@ -19,9 +30,12 @@ function Todolist() {
   const handleAddItemOnList = (e) => {
     if (previewTitle == "" && previewDescription == ""){
       document.getElementById('alertContainer').innerHTML = '<div class="alert alert-warning" role="alert">Veuillez au moins renseigner un champ</div>'
-    }else{
+    }else if (counterStatus == true){
+      document.getElementById('alertContainer').innerHTML = '<div class="alert-dismissible alert alert-warning" role="alert">Vous avez trop de tâches en cours</div>'
+  }else{
       e.preventDefault()
-      document.getElementById('alertContainer').innerHTML = ''
+      document.getElementById('alertContainer').innerHTML = '<div class="alert alert-success" role="alert">la tâche ' + previewTitle + ' a été ajoutée à "à faire".</div>'
+      // document.getElementById('alertContainer').innerHTML = ''
       const id = generateUniqueID();
       const temporaryList = {
         id: id,
@@ -50,12 +64,12 @@ function Todolist() {
         <div className="form">
           <input type="text" className="form-control" id='text' placeholder="titre de la tâche" onChange={e => { setPreviewTitle(e.target.value) }} />
           <textarea wrap='hard' id='textarea' className="form-control" placeholder="Description de la tâche" onChange={e => { setPreviewDescripton(e.target.value) }} rows='6' cols="auto" />
-          <button className="btn btn-primary" onClick={(e) => handleAddItemOnList(e)}>Ajouter la tâche</button>
+          <button className="btn btn-primary" id="primarybutton" onClick={(e) => handleAddItemOnList(e)}>Ajouter la tâche</button>
         </div>
         {/* Carte de prévision */}
         <div className="cardPreview_container">
           <div className="wrapper">
-            <h2>{previewTitle}</h2>
+            <h3>{previewTitle}</h3>
             <p>{previewDescription}</p>
           </div>
         </div>
