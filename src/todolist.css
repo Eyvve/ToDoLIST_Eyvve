@@ -48,6 +48,7 @@
 .form-control {
   overflow: auto;
   overflow-wrap: break-word;
+  resize: none;
 }
 
 .top_container {
