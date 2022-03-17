@@ -1,0 +1,73 @@
+.cardPreview_container {
+  margin: 0 auto;
+  position: relative;
+  height: 300px;
+  width: 250px;
+  border-radius: 10%;
+  background-color: darkslategrey;
+  margin-top: 25px;
+
+  color: lightgrey;
+  padding: 25px;
+
+  display: grid;
+  grid-template-rows: 1fr 5fr 1fr;
+}
+
+.wrapper {
+  width: 100%;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrapper > * {
+  max-width: 100%;
+}
+
+.button_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 10px;
+
+  position: relative;
+  margin: 0 auto;
+}
+
+.top_container {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  height: 500px;
+  width: 50%;
+  align-items: center;
+}
+
+.lists {
+  display: flex;
+  flex-direction: row;
+}
+
+.todo,
+.done {
+  width: 50%;
+}
+
+.todo > h2 {
+  text-align: center;
+}
+
+.todo > div {
+  background-color: rgba(255, 0, 0, 0.815);
+}
+
+.done > div {
+  background-color: rgb(1, 168, 1);
+}
